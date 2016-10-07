@@ -1,0 +1,27 @@
+{% extends "base.html"%}
+
+{% block content %}
+<div class="container">
+    <div style="text-align: center;border-radius: 10px" class="result">
+
+        {% if insert_result %}
+            <h3>嵌入结果</h3>
+            <img src="{{url_for('static', filename = insert_result) }}" alt="">
+        {% endif %}
+
+        {% if extract_result %}
+            <h3>提取结果</h3>
+            <img src="{{url_for('static', filename = extract_result) }}" alt="">
+        {% endif %}
+    </div>
+    <div class="logo-result" style="text-align: center;margin-top:100px;">
+
+    </div>
+
+</div>
+
+{% endblock %}
+{% block scripts %}
+{{super()}}
+<script src="{{url_for('static', filename='scripts/extract.js')}}"></script>
+{% endblock %}

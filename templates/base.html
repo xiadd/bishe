@@ -1,0 +1,25 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}This is an example page{% endblock %}
+
+{% block navbar %}
+<div class="navbar nav-pills">
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="/">Home</a></li>
+        <li class="dropdown" role="presentation">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">嵌入水印<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/main">不分块</a></li>
+            <li><a href="/main/block">分块</a></li>
+          </ul>
+        </li>
+        <li class="dropdown" role="presentation">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">提取水印<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/extract">不分块</a></li>
+            <li><a href="/extract/block">分块</a></li>
+          </ul>
+        </li>
+        <li role="presentation" class="active"><a href="#">result</a></li>
+    </ul>
+</div>
+{% endblock %}

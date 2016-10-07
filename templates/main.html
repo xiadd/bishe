@@ -1,0 +1,69 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}This is an example page{% endblock %}
+
+{% block navbar %}
+<div class="navbar nav-pills">
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="/">Home</a></li>
+        <li class="dropdown" role="presentation">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">嵌入水印<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/main">不分块</a></li>
+            <li><a href="/main/block">分块</a></li>
+          </ul>
+        </li>
+        <li class="dropdown" role="presentation">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">提取水印<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/extract">不分块</a></li>
+            <li><a href="/extract/block">分块</a></li>
+          </ul>
+        </li>
+        <li role="presentation"><a href="#">result</a></li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div style="text-align: center">
+        <img src="{{url_for('static', filename = 'assets/chooseImage.png')}}" alt="" class="img-rounded image-preview" style="max-height: 200px;margin-right: 40px;cursor: pointer">
+        <img src="{{url_for('static', filename = 'assets/chooseLogo.png')}}" alt="" class="img-rounded logo-preview" style="max-height: 200px;cursor: pointer">
+    </div>
+    <div style="text-align: center;margin-top: 100px;border-radius: 10px" class="result">
+        {% if insert_result %}
+            <img src="{{url_for('static', filename = insert_result) }}" alt="">
+        {% endif %}
+    </div>
+    {% if url == '/block' %}
+        <form action="/main/block" method="POST" enctype="multipart/form-data" style="margin-top:100px;">
+            <div class="form-group" style="display: none">
+                <input type="file" name="uploadImage" accept="image/*" class="upload-image">
+                <input type="file" name="uploadLogo" accept="image/*" class="upload-logo">
+            </div>
+            <div class="form-group" align="center">
+                <input type="submit" class="btn btn-default" value="分块嵌入Logo">
+            </div>
+        </form>
+    {% endif %}
+
+    {% if url == '/' %}
+        <form action="/main" method="POST" enctype="multipart/form-data" style="margin-top:100px;">
+            <div class="form-group" style="display: none">
+                <input type="file" name="uploadImage" accept="image/*" class="upload-image">
+                <input type="file" name="uploadLogo" accept="image/*" class="upload-logo">
+            </div>
+            <div class="form-group" align="center">
+                <input type="submit" class="btn btn-default" value="嵌入Logo">
+            </div>
+        </form>
+    {% endif %}
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{{super()}}
+<script src="{{url_for('static', filename='scripts/index.js')}}"></script>
+{% endblock %}
